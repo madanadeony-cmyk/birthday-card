@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Card</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      font-family: "Georgia", serif;
+      padding: 1rem;
+    }
+
+    .card-wrapper {
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .card {
+      position: relative;
+      width: 320px;
+      height: 420px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .card-wrapper.open .card {
+      transform: rotateY(-180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* Front of card (closed) */
+    .card-front {
+      padding: 0;
+      overflow: hidden;
+      border: 3px solid #c4a574;
+    }
+
+    .card-front .cover-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9px;
+    }
+
+
+    /* Back / inside of card (message) */
+    .card-back {
+      background: linear-gradient(145deg, #f5ebe0 0%, #e8d5b7 100%);
+      border: 3px solid #c4a574;
+      color: #5c4033;
+      transform: rotateY(180deg);
+    }
+
+    .card-back h2 {
+      font-size: 1.25rem;
+      font-weight: normal;
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .card-back .message {
+      font-size: 1rem;
+      line-height: 1.6;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .card-back .hint {
+      margin-top: auto;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="card-wrapper" id="cardWrapper" role="button" tabindex="0" aria-label="Birthday card - click to open">
+    <div class="card">
+      <div class="card-face card-front">
+        <!-- Cover image: 320×420px (or 640×840 for sharp retina). Put your image in this folder and set src below. -->
+        <img class="cover-image" src="birthday.png" alt="">
+      </div>
+      <div class="card-face card-back">
+        <h2>Liewe Michellie</h2>
+        <div class="message">
+          My liefste baba sussie ❤️
+
+Ek kan actually die dag onthou wat ek jou die eerste keer gesien het. Nie jou gesiggie nie, maar ek kan wel onthou hoe mamma op die bed gesit het met jou in haar arms net n kombersie om julle 2 om jou warm te hou. Ek het nooit gedink dat daai dag my grootste geskenk sal wees nie ❤️
+
+
+Baie baie geluk met jou verjaarsdag my liewe sussie ❤️ Ek hoop jy word lekker vrot bederf want jy verdien dit !! Jy is so amazing mens en I am honoured to watch you turn into this beautiful woman that you are becoming ❤️ 
+
+I’ll always have your back! 
+
+Love you and miss you xx
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const wrapper = document.getElementById('cardWrapper');
+
+    function toggleCard() {
+      wrapper.classList.toggle('open');
+    }
+
+    wrapper.addEventListener('click', toggleCard);
+    wrapper.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleCard();
+      }
+    });
+  </script>
+</body>
+</html>
